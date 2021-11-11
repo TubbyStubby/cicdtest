@@ -12,6 +12,20 @@ describe('Hello World', () => {
     })
 })
 
+describe('Cache test', () => {
+    test('Post', async () => {
+        let response = await request.post('/cache/testing');
+        expect(response.text).toBe('OK');
+    })
+    
+    test('Get', async () => {
+        let response = await request.get('/cache/testing');
+        expect(response.text).toBe('testing');
+    })
+})
+
 afterAll(done => {
-    server.close(done);
+    server.close(() => {
+        require('./redis-helper').quit(done);
+    });
 })

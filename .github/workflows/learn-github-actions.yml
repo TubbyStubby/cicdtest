@@ -12,5 +12,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.17.4'
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.2.0
+        with:
+          redis-version: '6'
       - run: npm install ci
       - run: npm test
