@@ -16,5 +16,6 @@ jobs:
         uses: supercharge/redis-github-action@1.2.0
         with:
           redis-version: '6'
+          redis-port: 6090
       - run: npm install ci
       - run: npm test
