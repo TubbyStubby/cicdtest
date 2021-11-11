@@ -7,11 +7,10 @@ on:
 jobs:
   test-pr:
     runs-on: ubuntu-latest
+    env:
+      rport: ${{ secrets.RPORT }}
+      rhost: ${{ secrets.RHOST }}
     steps:
-      - name: Setting up env
-        env:
-            rport: ${{ secrets.RPORT }}
-            rhost: ${{ secrets.RHOST }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
