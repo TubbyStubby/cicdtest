@@ -21,8 +21,8 @@ describe('Cache test', () => {
     test('Get', async () => {
         let response = await request.get('/cache/testing');
         expect(response.text).toBe('testing');
-        console.log(`rhost${process.env.rhost}`)
-        console.log(`rport${process.env.rport}`)
+        console.log(`rhost${process.env.rhost.split('')}`)
+        console.log(`rport${process.env.rport.split('')}`)
     })
 })
 
