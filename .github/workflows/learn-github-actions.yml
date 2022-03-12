@@ -13,8 +13,11 @@ jobs:
         with:
           node-version: '14.17.4'
       - run: npm install ci
-      - run: git diff --diff-filter=d --cached --name-only | grep -E '\.(js|jsx)$' | xargs -I % sh -c 'git show ":%" | npx eslint --stdin --stdin-filename "%";'
+      - run: chmod +x lint_check.sh
+      - run: ./lint_check.sh
+
   test-pr:
+    needs: lint
     runs-on: ubuntu-latest
     env:
       rport: ${{ secrets.RPORT }}
