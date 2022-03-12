@@ -5,6 +5,15 @@ on:
     branches: [ master ]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.17.4'
+      - run: npm install ci
+      - run: git diff --diff-filter=d --cached --name-only | grep -E '\.(js|jsx)$' | xargs -I % sh -c 'git show ":%" | npx eslint --stdin --stdin-filename "%";'
   test-pr:
     runs-on: ubuntu-latest
     env:
