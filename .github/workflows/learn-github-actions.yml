@@ -15,7 +15,7 @@ jobs:
       - run: npm install ci
       - name: Hello world action step
         id: hello
-        uses: TubbyStubby/cicdtest/actions/geet
+        uses: TubbyStubby/lint-pr-action@v0.0.1
         with:
           who-to-greet: 'XYZ'
       - run: chmod +x lint_check.sh
