@@ -22,9 +22,8 @@ jobs:
           redis-version: '6'
           redis-port: 6090
       - run: npm install ci
-      - name: Hello world action step
-        id: hello
-        uses: TubbyStubby/lint-pr-action@v0.0.1
+      - uses: sibiraj-s/action-eslint@v2
         with:
-          who-to-greet: 'XYZ'
+          extensions: 'js'
+          annotations: true
       - run: npm test
