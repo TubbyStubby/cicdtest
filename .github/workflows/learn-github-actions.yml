@@ -17,7 +17,7 @@ jobs:
           node-version: '14.17.4'
           cache: 'npm'
       - run: npm install ci
-      - uses: TubbyStubby/testing-gh-action@v0.0.2
+      - uses: TubbyStubby/testing-gh-action@v0.0.3
         with:
           who-to-greet: 'This Guy'
           
