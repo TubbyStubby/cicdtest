@@ -13,6 +13,11 @@ jobs:
         with:
           node-version: '14.17.4'
       - run: npm install ci
+      - name: Hello world action step
+        id: hello
+        uses: TubbyStubby/cicdtest/actions/geet
+        with:
+          who-to-greet: 'XYZ'
       - run: chmod +x lint_check.sh
       - run: ./lint_check.sh
 
