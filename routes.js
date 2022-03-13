@@ -14,6 +14,4 @@ router.get('/cache/:stuff', async (req, res) => {
     return res.send(result);
 });
 
-noice;
-
 module.exports = router;
