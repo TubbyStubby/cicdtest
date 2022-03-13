@@ -6,7 +6,6 @@ on:
 
 jobs:
   test-pr:
-    needs: lint
     runs-on: ubuntu-latest
     env:
       rport: ${{ secrets.RPORT }}
