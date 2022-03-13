@@ -16,14 +16,8 @@ jobs:
         with:
           node-version: '14.17.4'
           cache: 'npm'
-      - name: Start Redis
-        uses: shogo82148/actions-setup-redis@v1
-        with:
-          redis-version: '6'
-          redis-port: 6090
       - run: npm install ci
-      - uses: sibiraj-s/action-eslint@v2
+      - uses: TubbyStubby/testing-gh-action@v0.0.2
         with:
-          extensions: 'js'
-          annotations: true
-      - run: npm test
+          who-to-greet: 'This Guy'
+          
