@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const nodebackForPromise = require('bluebird/js/release/nodeback');
 const rclient = require('./redis-helper');
 
 router.get('/', async (req, res, next) => { res.send('Hello World!') });
