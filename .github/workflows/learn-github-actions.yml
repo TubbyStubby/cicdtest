@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: '14.17.4'
           cache: npm
+
+      - name: Printing some stuff
+        run: echo "${{ GITHUB_WORKSPACE }}/node_modules"
       
       - name: Cache node modules
         id: cache-node-modules
