@@ -27,7 +27,7 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: ${{ GITHUB_WORKSPACE }}/node_modules
+          path: ${{ env.GITHUB_WORKSPACE }}/node_modules
           key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-test-${{ env.cache-name }}-
