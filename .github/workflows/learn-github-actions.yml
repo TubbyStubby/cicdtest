@@ -28,9 +28,10 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: |
+            **/.cache
             **/node_modules
             **/.eslintcache
-          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-testv2-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-test-
