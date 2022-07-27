@@ -12,11 +12,28 @@ jobs:
       rhost: ${{ secrets.RHOST }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      
+      - uses: actions/setup-node@v3
         with:
           node-version: '14.17.4'
-          cache: 'npm'
-      - run: npm install ci
+          cache: npm
+      
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/node_modules
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
+      
+      - name: Install dependencies
+        run: npm install
+
       - uses: TubbyStubby/testing-gh-action@v0.0.5
         with:
           who-to-greet: 'This Guy'
