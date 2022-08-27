@@ -37,7 +37,7 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
       
-      - if: ${{ steps.cache-node-modules.outputs.cache-hit == 'false' }}
+      - if: ${{ steps.cache-node-modules.output.cache-hit == 'false' }}
         name: Install dependencies
         run: npm install
 
