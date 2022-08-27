@@ -37,7 +37,7 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
       
-      - run: echo ${{ steps.cache-node-modules.outputs }}
+      - run: echo ${{ toJson(steps.cache-node-modules.outputs) }}
         # name: Install dependencies
         # run: npm install
 
