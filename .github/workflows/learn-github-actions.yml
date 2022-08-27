@@ -37,7 +37,8 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
       
-      - name: Install dependencies
+      - if: ${{ steps.cache-node-modules.outputs.cache-hit == 'false' }}
+        name: Install dependencies
         run: npm install
 
       - uses: TubbyStubby/testing-gh-action@v0.0.5
