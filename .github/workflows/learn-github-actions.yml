@@ -12,13 +12,30 @@ jobs:
       rhost: ${{ secrets.RHOST }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      
+      - uses: actions/setup-node@v3
         with:
           node-version: '14.17.4'
-      - name: Start Redis
-        uses: shogo82148/actions-setup-redis@v1
+          cache: npm
+
+      - name: Printing some stuff
+        run: echo "${GITHUB_WORKSPACE}/node_modules"
+      
+      - uses: actions/cache@v3
+        id: cache-node-modules
+        env:
+          cache-name: cache-node-modules
         with:
-          redis-version: '6'
-          redis-port: 6090
-      - run: npm install ci
-      - run: npm test
+          path: |
+            **/.cache
+            **/node_modules
+          key: ${{ runner.os }}-testv2-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      
+      - if: steps.cache-node-modules.outputs.cache-hit != true
+        name: Install dependencies
+        run: npm install
+
+      - uses: TubbyStubby/testing-gh-action@v0.0.5
+        with:
+          who-to-greet: 'This Guy'
+          

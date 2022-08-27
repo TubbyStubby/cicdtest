@@ -1,0 +1,45 @@
+name: CacheDependencies
+
+on:
+  merge:
+    branches: [ master ]
+
+jobs:
+  test-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14.17.4'
+          cache: npm
+
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-testv4-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-testv4-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Cache binaries
+        id: cache-binaries
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-binaries
+        with:
+          path: |
+            ~/.cache
+            **/.cache
+          key: ${{ runner.os }}-bincachev3-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-bincachev3-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
+      - if: ${{ steps.cache-binaries.outputs.cache-hit == 'false' }}
+        name: Install dependencies
+        run: npm install
